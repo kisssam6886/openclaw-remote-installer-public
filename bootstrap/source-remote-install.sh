@@ -48,8 +48,7 @@ if [ -f "$WORKDIR/bootstrap/macos.sh" ]; then
 else
   REPO_DIR="$(find "$WORKDIR" -mindepth 1 -maxdepth 1 -type d | while read -r candidate; do
     if [ -f "$candidate/bootstrap/macos.sh" ]; then
-      printf '%s
-' "$candidate"
+      printf '%s\n' "$candidate"
       break
     fi
   done)"
