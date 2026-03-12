@@ -1,0 +1,14 @@
+{
+  "name": "openclaw-remote-installer-public",
+  "version": "0.2.1",
+  "source_repo": "kisssam6886/openclaw-remote-installer-public",
+  "dist_branch": "main",
+  "bootstrap": {
+    "macos": "https://raw.githubusercontent.com/kisssam6886/openclaw-remote-installer-public/main/bootstrap/remote-install.sh",
+    "windows": "https://raw.githubusercontent.com/kisssam6886/openclaw-remote-installer-public/main/bootstrap/remote-install.ps1"
+  },
+  "archives": {
+    "tar_gz": "https://raw.githubusercontent.com/kisssam6886/openclaw-remote-installer-public/main/releases/openclaw-remote-installer-main.tar.gz",
+    "zip": "https://raw.githubusercontent.com/kisssam6886/openclaw-remote-installer-public/main/releases/openclaw-remote-installer-main.zip"
+  }
+}
