@@ -27,7 +27,16 @@ try {
 
     Write-Host '[Remote Install] Extracting installer archive...'
     Expand-Archive -Path $zipPath -DestinationPath $tempRoot -Force
-    $repoDir = Get-ChildItem -Path $tempRoot -Directory | Select-Object -First 1
+
+    $repoDir = $null
+    if (Test-Path (Join-Path $tempRoot 'bootstrap/windows.ps1')) {
+        $repoDir = Get-Item $tempRoot
+    }
+    else {
+        $repoDir = Get-ChildItem -Path $tempRoot -Directory | Where-Object {
+            Test-Path (Join-Path $_.FullName 'bootstrap/windows.ps1')
+        } | Select-Object -First 1
+    }
 
     if (-not $repoDir) {
         throw 'Failed to locate extracted installer directory.'

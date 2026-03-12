@@ -42,9 +42,20 @@ fetch_archive "$OPENCLAW_INSTALL_ARCHIVE_URL" "$ARCHIVE_FILE"
 
 echo "[Remote Install] Extracting installer archive..."
 tar -xzf "$ARCHIVE_FILE" -C "$WORKDIR"
-REPO_DIR="$(find "$WORKDIR" -mindepth 1 -maxdepth 1 -type d | sed -n '1p')"
 
-if [ -z "$REPO_DIR" ] || [ ! -d "$REPO_DIR" ]; then
+if [ -f "$WORKDIR/bootstrap/macos.sh" ]; then
+  REPO_DIR="$WORKDIR"
+else
+  REPO_DIR="$(find "$WORKDIR" -mindepth 1 -maxdepth 1 -type d | while read -r candidate; do
+    if [ -f "$candidate/bootstrap/macos.sh" ]; then
+      printf '%s
+' "$candidate"
+      break
+    fi
+  done)"
+fi
+
+if [ -z "$REPO_DIR" ] || [ ! -f "$REPO_DIR/bootstrap/macos.sh" ]; then
   echo "Failed to locate extracted installer directory."
   exit 1
 fi
