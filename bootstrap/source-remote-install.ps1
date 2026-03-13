@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 
 $psMajor = 2
 if ($PSVersionTable -and $PSVersionTable.PSVersion) { $psMajor = [int]$PSVersionTable.PSVersion.Major }
