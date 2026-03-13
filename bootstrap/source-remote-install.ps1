@@ -1,5 +1,9 @@
 $ErrorActionPreference = 'Stop'
 
+$psMajor = 2
+if ($PSVersionTable -and $PSVersionTable.PSVersion) { $psMajor = [int]$PSVersionTable.PSVersion.Major }
+if ($psMajor -lt 5) { throw "当前 Windows PowerShell 版本过旧（检测到 $psMajor）。Windows 安装主链当前要求 Windows PowerShell 5.1+ 或 PowerShell 7。请先升级 PowerShell，再重试。" }
+
 $repo = if ($env:OPENCLAW_INSTALL_REPO) { $env:OPENCLAW_INSTALL_REPO } else { 'kisssam6886/openclaw-remote-installer' }
 $ref = if ($env:OPENCLAW_INSTALL_REF) { $env:OPENCLAW_INSTALL_REF } else { 'main' }
 $archiveUrl = if ($env:OPENCLAW_INSTALL_ARCHIVE_URL) { $env:OPENCLAW_INSTALL_ARCHIVE_URL } else { "https://github.com/$repo/archive/refs/heads/$ref.zip" }
